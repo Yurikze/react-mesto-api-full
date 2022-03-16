@@ -7,11 +7,12 @@ const bodyParser = require('body-parser');
 const { NotFoundError } = require('./Error/NotFoundError');
 const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
+const cors = require('./middlewares/cors');
 const error = require('./middlewares/error');
 const { validateUrl } = require('./utils/utils');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 4000 } = process.env;
 
 const app = express();
 
@@ -22,6 +23,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 });
 
 app.use(requestLogger);
+app.use(cors);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 

@@ -62,13 +62,14 @@ function App() {
   }, []);
 
   const tokenCheck = () => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      return;
-    }
+    debugger
+    // const token = localStorage.getItem('token');
+    // if (!token) {
+    //   return;
+    // }
 
     auth
-      .getContent(localStorage.getItem('token'))
+    .getContent()
       .then((res) => {
         setLoggedIn(true);
         setCurrentUser((user) => ({
@@ -101,9 +102,9 @@ function App() {
 
   const onLogin = (data) => {
     return auth
-      .signin(data)
-      .then((res) => {
-        localStorage.setItem('token', res.token);
+    .signin(data)
+    .then((res) => {
+        console.log(123);
         tokenCheck();
       })
       .catch((e) => console.log(e));

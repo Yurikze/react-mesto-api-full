@@ -5,6 +5,7 @@ class Auth {
   }
 
   _parseResponse(res) {
+    console.log(res)
     return res.ok
       ? res.json()
       : Promise.reject(new Error(`Ошибка ${res.status}: ${res.statusText}`));
@@ -23,22 +24,25 @@ class Auth {
     return fetch(`${this.baseUrl}/signin`, {
       method: 'POST',
       headers: this.headers,
+      credentials: 'include',
       body: JSON.stringify({ email, password }),
     }).then(this._parseResponse);
   }
 
-  getContent(token) {
+  getContent() {
     return fetch(`${this.baseUrl}/users/me`, {
       method: 'GET',
-      headers: { ...this.headers, Authorization: `Bearer ${token}` },
+      credentials: 'include',
+      headers: this.headers,
     }).then(this._parseResponse);
   }
 }
 
 const auth = new Auth({
-  baseUrl: 'https://auth.nomoreparties.co',
+  // baseUrl: 'https://auth.nomoreparties.co',
+  baseUrl: 'http://localhost:4000',
   headers: {
-    // 'Accept': 'application/json',
+    'Accept': 'application/json',
     'Content-Type': 'application/json',
   },
 });
