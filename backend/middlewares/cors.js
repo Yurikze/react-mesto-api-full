@@ -3,8 +3,8 @@ const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
 const allowedCors = [
   'localhost:3000',
   'http://localhost:3000',
-  'freeplace.nomoredomains.work/',
-  'http://freeplace.nomoredomains.work/',
+  'api.freeplace.nomoredomains.work/',
+  'http://api.freeplace.nomoredomains.work/',
 ];
 
 module.exports = (req, res, next) => {
