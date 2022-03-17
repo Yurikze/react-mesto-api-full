@@ -62,7 +62,6 @@ function App() {
   }, []);
 
   const tokenCheck = () => {
-    debugger
     // const token = localStorage.getItem('token');
     // if (!token) {
     //   return;
