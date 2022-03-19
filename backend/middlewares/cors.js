@@ -5,6 +5,7 @@ const allowedCors = [
   'http://localhost:3000',
   'freeplace.nomoredomains.work',
   'http://freeplace.nomoredomains.work',
+  'https://freeplace.nomoredomains.work',
 ];
 
 module.exports = (req, res, next) => {
