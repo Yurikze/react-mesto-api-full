@@ -47,7 +47,7 @@ class Auth {
 }
 
 const auth = new Auth({
-  baseUrl: 'http://api.freeplace.nomoredomains.work',
+  baseUrl: 'https://api.freeplace.nomoredomains.work',
   // baseUrl: 'http://localhost:4000',
   headers: {
     'Accept': 'application/json',
