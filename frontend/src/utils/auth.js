@@ -24,9 +24,17 @@ class Auth {
     return fetch(`${this.baseUrl}/signin`, {
       method: 'POST',
       headers: this.headers,
-      // credentials: 'include',
+      credentials: 'include',
       body: JSON.stringify({ email, password }),
     }).then(this._parseResponse);
+  }
+
+  signout() {
+    return fetch(`${this.baseUrl}/signout`, {
+      method: 'POST',
+      headers: this.headers,
+      credentials: 'include',
+    }).then(this._parseResponse)
   }
 
   getContent() {

@@ -62,11 +62,6 @@ function App() {
   }, []);
 
   const tokenCheck = () => {
-    // const token = localStorage.getItem('token');
-    // if (!token) {
-    //   return;
-    // }
-
     auth
     .getContent()
       .then((res) => {
@@ -110,9 +105,8 @@ function App() {
   };
 
   const onLogout = () => {
+    auth.signout()
     setLoggedIn(false);
-    localStorage.removeItem('token');
-    history.push('/sign-in');
   };
 
   const handleCardLike = (card) => {

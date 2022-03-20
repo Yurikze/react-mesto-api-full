@@ -5,7 +5,7 @@ require('dotenv').config();
 const { celebrate, Joi, errors } = require('celebrate');
 const bodyParser = require('body-parser');
 const { NotFoundError } = require('./Error/NotFoundError');
-const { login, createUser } = require('./controllers/users');
+const { login, createUser, logout } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const cors = require('./middlewares/cors');
 const error = require('./middlewares/error');
@@ -48,15 +48,12 @@ app.post('/signup', celebrate({
     avatar: Joi.string().custom(validateUrl, 'custom validation'),
   }),
 }), createUser);
+app.post('/signout', logout);
 app.use('/users', auth, require('./routes/users'));
 app.use('/cards', auth, require('./routes/cards'));
 
 app.use('*', (req, res, next) => {
-  try {
-    throw new NotFoundError('Страница не найдена');
-  } catch (err) {
-    next(err);
-  }
+  next(new NotFoundError('Страница не найдена'));
 });
 
 app.use(errorLogger);

@@ -21,9 +21,26 @@ module.exports.login = (req, res, next) => {
           maxAge: 3600000 * 24 * 7,
           httpOnly: true,
         })
-        .send(user);
+        .send({
+          data: {
+            email: user.email,
+            name: user.name,
+            about: user.about,
+            avatar: user.avatar,
+          },
+        });
     })
     .catch(next);
+};
+
+module.exports.logout = (req, res, next) => {
+  res.cookie('jwt', 'jwt.token.revoked', {
+    httpOnly: true,
+    sameSite: true,
+    maxAge: -1,
+  }).send({
+    message: 'Сессия завершена',
+  });
 };
 
 module.exports.getMe = async (req, res, next) => {
