@@ -45,7 +45,6 @@ function App() {
 
     const fetchCards = async () => {
       const res = await api.getInitialCards();
-      console.log(res)
       setCards(res);
     };
     try {
@@ -56,28 +55,11 @@ function App() {
     }
   }, [loggedIn]);
 
-  // React.useEffect(() => {
-  //   const fetchCards = async () => {
-  //     const res = await api.getInitialCards();
-  //     console.log(res)
-  //     setCards(res);
-  //   };
-  //   try {
-  //     fetchCards();
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }, []);
-
   const tokenCheck = () => {
     auth
     .getContent()
       .then((res) => {
         setLoggedIn(true);
-        // setCurrentUser((user) => ({
-        //   ...user,
-        //   email: res.data.email,
-        // }));
       })
       .catch((e) => console.log(e));
   };

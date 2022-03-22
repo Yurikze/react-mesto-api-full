@@ -5,7 +5,7 @@ class Auth {
   }
 
   _parseResponse(res) {
-    console.log(res)
+    // console.log(res)
     return res.ok
       ? res.json()
       : Promise.reject(new Error(`Ошибка ${res.status}: ${res.statusText}`));
@@ -47,8 +47,8 @@ class Auth {
 }
 
 const auth = new Auth({
-  baseUrl: 'https://api.freeplace.nomoredomains.work',
   // baseUrl: 'http://localhost:4000',
+  baseUrl: 'https://api.freeplace.nomoredomains.work',
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
