@@ -6,7 +6,8 @@ const { ForbiddenError } = require('../Error/ForbiddenError');
 
 module.exports.getCards = (req, res, next) => {
   Card.find({})
-    .then((cards) => res.send({ data: cards }))
+    .sort({ createdAt: 'desc' })
+    .then((cards) => res.send(cards))
     .catch(next);
 };
 
@@ -75,7 +76,7 @@ module.exports.dislikeCard = (req, res, next) => {
       if (!card) {
         throw new NotFoundError('Карточка с указанным id не найдена');
       }
-      res.send({ data: card });
+      res.send(card);
     })
     .catch((error) => {
       if (error.name === 'CastError') {

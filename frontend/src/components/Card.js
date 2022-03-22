@@ -10,8 +10,8 @@ const Card = ({ card, onCardClick, onCardLike, onCardDelete }) => {
   const currentUser = React.useContext(CurrentUserContext)
 
   React.useEffect(() => {
-    setIsLiked(() => card.likes.some(i => i._id === currentUser._id))
-    setIsOwn(card.owner._id === currentUser._id)
+    setIsLiked(() => card.likes.some(i => i === currentUser._id))
+    setIsOwn(card.owner === currentUser._id)
   }, [currentUser, card])
 
 

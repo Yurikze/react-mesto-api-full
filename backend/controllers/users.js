@@ -33,7 +33,7 @@ module.exports.login = (req, res, next) => {
     .catch(next);
 };
 
-module.exports.logout = (req, res, next) => {
+module.exports.logout = (req, res) => {
   res.cookie('jwt', 'jwt.token.revoked', {
     httpOnly: true,
     sameSite: true,
@@ -121,7 +121,7 @@ module.exports.updateUserInfo = async (req, res, next) => {
     if (!user) {
       throw new NotFoundError('Пользователь с id не найден');
     }
-    res.status(200).send({ data: user });
+    res.status(200).send(user);
   } catch (error) {
     if (error.name === 'ValidationError') {
       next(new NotValidError('Некорректные данные'));
@@ -139,7 +139,7 @@ module.exports.updateAvatar = (req, res, next) => {
       if (!user) {
         throw new NotFoundError('Пользователь с id не найден');
       }
-      res.status(200).send({ data: user });
+      res.status(200).send(user);
     })
     .catch((error) => {
       if (error.name === 'CastError') {

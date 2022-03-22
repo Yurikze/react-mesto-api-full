@@ -7,7 +7,7 @@ import Avatar from './Avatar';
 const Main = (props) => {
   const currentUser = React.useContext(CurrentUserContext);
 
-  const cadsList = props.cards.map((card) => (
+  const cadsList = props.cards.length && props.cards.map((card) => (
     <Card
       onCardClick={props.onCardClick}
       key={card._id}

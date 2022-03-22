@@ -39,37 +39,45 @@ function App() {
       const userData = await api.getUserInfo();
       setCurrentUser((user) => ({
         ...user,
-        ...userData,
-      }));
+        ...userData.data,
+      })); 
     }
-    try {
-      fetchUserData();
-    } catch (err) {
-      console.log(err);
-    }
-  }, []);
 
-  React.useEffect(() => {
     const fetchCards = async () => {
       const res = await api.getInitialCards();
+      console.log(res)
       setCards(res);
     };
     try {
-      fetchCards();
-    } catch (error) {
-      console.log(error);
+      loggedIn && fetchUserData();
+      loggedIn && fetchCards();
+    } catch (err) {
+      console.log(err);
     }
-  }, []);
+  }, [loggedIn]);
+
+  // React.useEffect(() => {
+  //   const fetchCards = async () => {
+  //     const res = await api.getInitialCards();
+  //     console.log(res)
+  //     setCards(res);
+  //   };
+  //   try {
+  //     fetchCards();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }, []);
 
   const tokenCheck = () => {
     auth
     .getContent()
       .then((res) => {
         setLoggedIn(true);
-        setCurrentUser((user) => ({
-          ...user,
-          email: res.data.email,
-        }));
+        // setCurrentUser((user) => ({
+        //   ...user,
+        //   email: res.data.email,
+        // }));
       })
       .catch((e) => console.log(e));
   };
@@ -110,7 +118,7 @@ function App() {
   };
 
   const handleCardLike = (card) => {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
     api
       .likeCard(card._id, isLiked)
       .then((newCard) => {
@@ -138,6 +146,7 @@ function App() {
     api
       .updateUserInfo(userData)
       .then((res) => {
+        console.log(res)
         setCurrentUser((user) => ({
           ...user,
           ...res,
