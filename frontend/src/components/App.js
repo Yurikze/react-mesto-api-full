@@ -88,7 +88,6 @@ function App() {
     return auth
     .signin(data)
     .then((res) => {
-        console.log(123);
         tokenCheck();
       })
       .catch((e) => console.log(e));
